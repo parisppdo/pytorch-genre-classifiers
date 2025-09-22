@@ -1,0 +1,10 @@
+# Ignore datasets
+genres_full/
+genres_medium/
+genres_small/
+
+# Ignore .idea folder
+.idea/
+
+# Ignore large .json file
+data_full.json
