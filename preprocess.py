@@ -67,7 +67,7 @@ def save_mfcc(dataset_path,
 
                     segment = signal[:, start_sample:finish_sample]
                     mfcc = mfcc_transform(segment)
-                    mfcc = mfcc.squeeze(0).T
+                    mfcc = mfcc.squeeze(0).T    # Using .T is crucial for input shape for RNNs. Optional for CNNs.
 
                     # store mfcc for segment if it has the expected length
                     if len(mfcc) == expected_num_mfcc_vectors_per_segment:
