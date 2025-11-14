@@ -6,9 +6,15 @@ genres_small/
 # Ignore .idea folder
 .idea/
 
-# Ignore large .json file
+# Ignore large .json files
 MFCC Classifiers/data_full.json
 Mel Spectogram Classifiers/data_full.json
+Mel Spectogram Classifiers/data_full_AST_hf.json
+Mel Spectogram Classifiers/data_small_AST.json
+Mel Spectogram Classifiers/data_small_AST_hf.json
 
 # Ignore Transformer file for the moment
-Mel Spectogram Classifiers/4. AudioSpectogramTransformer.ipynb
+Mel Spectogram Classifiers/5. AudioSpectogramTransformer.ipynb
+
+# Various ignored files
+Mel Spectogram Classifiers/preprocess_AST.py
