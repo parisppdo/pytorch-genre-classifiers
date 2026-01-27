@@ -6,6 +6,9 @@ genres_small/
 # Ignore .idea folder
 .idea/
 
+# Ignore sounts folder
+sounds/
+
 # Ignore large .json files
 MFCC Classifiers/data_full.json
 Mel Spectogram Classifiers/data_full.json
