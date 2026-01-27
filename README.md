@@ -7,14 +7,20 @@
 
 ## 📖 Overview
 
-This project contains experiments with music genre classification
-using the GTZAN dataset. The project explores different deep 
-learning approaches in PyTorch to automatically recognize and 
-categorize audio tracks into ten genres: Blues, Classical, 
-Country, Disco, HipHop, Jazz, Metal, Pop, Reggae, and Rock. 
-This experimentation provides insights on how various 
-models perform on this task and progressively refine 
-the classifiers.
+This repository contains the experimental work and supporting material
+for my **Master’s thesis**, focusing on **music genre classification
+using deep learning techniques**.
+
+The project includes a series of experiments conducted on the GTZAN dataset,
+exploring different deep learning approaches implemented in PyTorch
+to automatically recognize and categorize audio tracks into ten genres:
+Blues, Classical, Country, Disco, HipHop, Jazz, Metal, Pop, Reggae, and Rock.
+
+The goal of this work is to study and compare the performance of various
+neural network architectures and audio feature representations,
+providing insights into their effectiveness for music genre classification.
+The experiments progressively refine the models and classifiers
+developed as part of the thesis.
 
 The project includes two main classifier groups:
 - **Mel Spectrogram Classifiers**
