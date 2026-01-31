@@ -6,8 +6,8 @@ import json
 
 # Set DATASET_PATH according to the name of the dataset folder
 # Set name of extracted jason file in JSON_PATH
-DATASET_PATH = "../.genres_small"
-JSON_PATH = "backup data/data_small.json"
+DATASET_PATH = "../.genres_full"
+JSON_PATH = "data_full.json"
 
 SAMPLE_RATE = 22050
 DURATION = 30 # measured in seconds
