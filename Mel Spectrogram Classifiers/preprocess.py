@@ -8,7 +8,7 @@ import json
 # Set DATASET_PATH according to the name of the dataset folder
 # Set name of extracted jason file in JSON_PATH
 DATASET_PATH = "../.genres_full"
-JSON_PATH = "../AST-Tuned Mel Spectrogram Classifiers/backup data/data_full_128_mel_3_segments.json"
+JSON_PATH = "data_full.json"
 
 SAMPLE_RATE = 22050
 DURATION = 30 # measured in seconds
@@ -17,9 +17,9 @@ SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
 def save_melspec(dataset_path,
                 json_path,
                 n_mels=128,
-                n_fft=4096,
+                n_fft=4096, # (proposed in the following paper)
                 win_length=1024, # This is proposed in this paper: https://www.mdpi.com/2227-7390/10/23/4427 (It usually is equal to n_fft)
-                hop_length=512,
+                hop_length=512, # (proposed in the upper paper)
                 num_segments=5):  #num_segments -> number of pieces that each sound will be chopped into. Because we only have 100 samples for each genre
 
     # dictionary to store data
@@ -107,4 +107,4 @@ def save_melspec(dataset_path,
         json.dump(data, fp, indent=4)
 
 if __name__ == "__main__":
-    save_melspec(DATASET_PATH, JSON_PATH, num_segments=3)
+    save_melspec(DATASET_PATH, JSON_PATH, num_segments=10)
