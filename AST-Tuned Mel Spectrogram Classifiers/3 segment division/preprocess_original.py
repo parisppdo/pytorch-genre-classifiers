@@ -1,35 +1,32 @@
-# This script prepares the tensor data
-# with the same parameters as the AST.
-# We prepare it that way in order to
-# compare models.
+# This script can be used to ectract
+# segments with the same hyperparameters
+# as the original experiments, in order
+# to compare them with experiments done
+# with data extracted with the AST
+# prototype.
 
 import os
 import torch
 import torchaudio
 from torchaudio.transforms import AmplitudeToDB
-from torchaudio.transforms import Resample
 import math
 import json
 
 # Set DATASET_PATH according to the name of the dataset folder
 # Set name of extracted jason file in JSON_PATH
 DATASET_PATH = "../../.genres_full"
-JSON_PATH = "data_full.json"
+JSON_PATH = "data_full_original.json"
 
-SAMPLE_RATE = 16000
+SAMPLE_RATE = 22050
 DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
 
-# Creating resampling transform
-AST_SAMPLE_RATE = 16000
-resample = Resample(SAMPLE_RATE, AST_SAMPLE_RATE)
-
 def save_melspec(dataset_path,
                 json_path,
-                n_mels=128, # This is according to the AST and Hugging face settings
-                n_fft=512,  # This is according to the AST and Hugging face settings
-                win_length=400, # This is according to the AST and Hugging face settings
-                hop_length=160, # This is according to the AST and Hugging face settings
+                n_mels=128,
+                n_fft=4096, # (proposed in the following paper)
+                win_length=1024, # This is proposed in this paper: https://www.mdpi.com/2227-7390/10/23/4427 (It usually is equal to n_fft)
+                hop_length=512, # (proposed in the upper paper)
                 num_segments=5):  #num_segments -> number of pieces that each sound will be chopped into. Because we only have 100 samples for each genre
 
     # dictionary to store data
@@ -41,7 +38,7 @@ def save_melspec(dataset_path,
 
     # defining variables that will be used later on
     num_samples_per_segment = int(SAMPLES_PER_TRACK / num_segments)
-    expected_window_frames_per_segment = ((num_samples_per_segment - win_length) // hop_length) # round this number 1.2 -> 2
+    expected_window_frames_per_segment = math.ceil(num_samples_per_segment / hop_length) # round this number 1.2 -> 2
 
     # loop through all the genres
     for i, (dirpath, dirnames, filenames) in enumerate (os.walk(dataset_path)):
@@ -60,8 +57,7 @@ def save_melspec(dataset_path,
 
                 # load audio file
                 file_path = os.path.join(dirpath, f)
-                signal, _ = torchaudio.load(file_path) # RESAMPLING IS NOT NEEDED. GTZAN USES sr = 22050 Hz
-                signal = resample(signal)
+                signal, sr = torchaudio.load(file_path) # RESAMPLING IS NOT NEEDED. GTZAN USES sr = 22050 Hz
 
                 '''
                 Important note:
@@ -87,12 +83,11 @@ def save_melspec(dataset_path,
 
                 # create a mel spectogram transform for the following for loop
                 mel_transform = torchaudio.transforms.MelSpectrogram(
-                    sample_rate=SAMPLE_RATE,
+                    sample_rate=sr,
                     n_fft=n_fft,
                     win_length=win_length,
                     hop_length=hop_length,
-                    n_mels=n_mels,
-                    center=False
+                    n_mels=n_mels
                 )
 
                 # create a transform to turn the mel spectogram tensor from the power/amplitude scale to the decibel scale.
@@ -109,7 +104,6 @@ def save_melspec(dataset_path,
                     # melspec = torchaudio.functional.amplitude_to_DB(melspec, multiplier=10.0, amin=1e-10, db_multiplier=0.0)
                     melspec = power_to_db(melspec)
                     melspec = melspec.squeeze(0).T    # Using .T is crucial for input shape for RNNs. Optional for CNNs.
-
 
                     # store mel spectogram for segment if it has the expected length. Our inputs need fixed length
                     if len(melspec) == expected_window_frames_per_segment:

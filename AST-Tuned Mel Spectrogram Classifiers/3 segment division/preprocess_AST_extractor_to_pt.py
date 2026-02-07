@@ -31,8 +31,8 @@ from transformers import ASTFeatureExtractor
 
 # Set DATASET_PATH according to the name of the dataset folder
 # Set name of extracted jason file in JSON_PATH
-DATASET_PATH = "../.genres_full"
-EXPORT_PATH = "backup data/data_full_AST_hf_10_seg.pt"
+DATASET_PATH = "../../.genres_full"
+EXPORT_PATH = "data_full_AST.pt"
 
 SAMPLE_RATE = 22050
 DURATION = 30 # measured in seconds
@@ -114,4 +114,4 @@ def save_melspec(dataset_path,
     )
 
 if __name__ == "__main__":
-    save_melspec(DATASET_PATH, EXPORT_PATH, num_segments=10)
+    save_melspec(DATASET_PATH, EXPORT_PATH, num_segments=3)
