@@ -9,7 +9,7 @@
 # Ignore sounts folder
 sounds/
 
-# Ignore large .json files
+# Ignore large .json files also .pt files
 AST-Tuned Mel Spectrogram Classifiers/**/*.json
 AST-Tuned Mel Spectrogram Classifiers/**/*.pt
 
