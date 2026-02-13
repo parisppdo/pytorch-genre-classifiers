@@ -19,4 +19,7 @@ Mel Spectrogram Classifiers/**/*.pt
 MFCC Classifiers/**/*.json
 MFCC Classifiers/**/*.pt
 
+# Ignore TensorBoard logs
+runs/
+
 # Various ignored files
