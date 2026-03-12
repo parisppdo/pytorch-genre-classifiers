@@ -6,9 +6,6 @@
 # Ignore .idea folder
 .idea/
 
-# Ignore sounts folder
-sounds/
-
 # Ignore large .json files also .pt files
 AST-Tuned Mel Spectrogram Classifiers/**/*.json
 AST-Tuned Mel Spectrogram Classifiers/**/*.pt
@@ -23,3 +20,4 @@ MFCC Classifiers/**/*.pt
 runs/
 
 # Various ignored files
+sounds/
