@@ -25,7 +25,7 @@ developed as part of the thesis.
 
 ---
 
-## 🗂️️ Project Structure
+## 🗂️ Project Structure
 
 The folder structure of the project is the following:  
 ```
