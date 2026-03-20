@@ -1,4 +1,4 @@
-# 🎶 Music Genre Classification (Using Pytorch)
+# 🎶 Music Genre Classification (Using PyTorch)
 
 ## Table of Contents
 - [📖 Overview](#-overview)
